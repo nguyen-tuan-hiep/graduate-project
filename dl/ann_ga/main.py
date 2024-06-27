@@ -40,15 +40,6 @@ columns = ['Mg_meq_L', 'TOTP_mg_L', 'pH', 'TEMP_°C', 'TSS_mg_L', 'DO_mg_L',  'N
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-# train_path = '../../data/impute10/train/'
-# test_path = '../../data/impute10/test/'
-# train_files = os.listdir(train_path)
-# test_files = os.listdir(test_path)
-# train_df = pd.concat(
-#     [pd.read_csv(os.path.join(train_path, f), usecols=columns) for f in train_files])
-# test_df = pd.concat(
-#     [pd.read_csv(os.path.join(test_path, f), usecols=columns) for f in test_files])
-
 train_df = pd.read_csv('../../data/combined_0_to_nan_impute/train.csv', usecols=columns)
 test_df = pd.read_csv('../../data/combined_0_to_nan_impute/test.csv', usecols=columns)
 
@@ -152,7 +143,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
             if avg_val_loss < best_val_loss:
                 best_val_loss = avg_val_loss
                 best_epoch = epoch
-                torch.save(model.state_dict(), f'./models/best_model_{optim}.pth')
+                # torch.save(model.state_dict(), f'./models/best_model_{optim}.pth')
 
             if epoch - best_epoch >= patience:
                 print(f'Early stopping at epoch {epoch+1}')

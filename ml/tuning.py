@@ -42,16 +42,6 @@ columns.append(label)
 
 columns = list(set(columns))
 
-# train_path = '../data/impute10/train'
-# train_files = os.listdir(train_path)
-# train_df = pd.concat(
-#     [pd.read_csv(os.path.join(train_path, f), usecols=columns) for f in train_files])
-
-# test_path = '../data/impute10/test'
-# test_files = os.listdir(test_path)
-# test_df = pd.concat(
-#     [pd.read_csv(os.path.join(test_path, f), usecols=columns) for f in test_files])
-
 train_df = pd.read_csv('../data/combined_0_to_nan_impute/train.csv', usecols=columns)
 test_df = pd.read_csv('../data/combined_0_to_nan_impute/test.csv', usecols=columns)
 
@@ -86,7 +76,7 @@ print('MSE:', mean_squared_error(y_test, y_pred))
 print('RMSE:', np.sqrt(mean_squared_error(y_test, y_pred)))
 print('R2:', r2_score(y_test, y_pred))
 
-
+# exit()
 
 
 with sklearn.config_context(print_changed_only=False):

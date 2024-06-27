@@ -29,11 +29,9 @@ set_seed(42)
 
 
 parser = argparse.ArgumentParser()
-# parser.add_argument('--label', type=str)
-# args = parser.parse_args()
-# label = args.label
-# parser.add_argument('--model_name', type=str)
-# model_name = args.model_name
+parser.add_argument('--data', type=str)
+args = parser.parse_args()
+data = args.data
 
 label = 'COND_mS_m'
 
@@ -43,9 +41,14 @@ columns = ['Mg_meq_L', 'TOTP_mg_L', 'pH', 'TEMP_°C', 'TSS_mg_L', 'DO_mg_L',
            'NH4N_mg_L', 'SO4_meq_L', 'Ca_meq_L', 'Cl_meq_L', 'NO32_mg_L', 'ALK_meq_L', label]
 columns = list(set(columns))
 
+if data == 'impute':
+    path = '../data/combined_0_to_nan_impute'
+elif data == 'drop':
+    path = '../data/combined_0_to_nan_drop'
 
-train_df = pd.read_csv('../data/combined_0_to_nan_drop/train.csv', usecols=columns)
-test_df = pd.read_csv('../data/combined_0_to_nan_drop/test.csv', usecols=columns)
+train_df = pd.read_csv(f'{path}/train.csv', usecols=columns)
+test_df = pd.read_csv(f'{path}/test.csv', usecols=columns)
+
 
 y_train = train_df[label]
 y_test = test_df[label]

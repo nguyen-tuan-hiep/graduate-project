@@ -1,14 +1,11 @@
-python regression_model_ga.py --model_name="RandomForestRegressor"
-python regression_model_ga.py --model_name="GradientBoostingRegressor"
-python regression_model_ga.py --model_name="SVR"
-python regression_model_ga.py --model_name="XGBRegressor"
+# baseline
+python regressor.py --data=drop
 
-python test.py --model_name="RandomForestRegressor"
-python test.py --model_name="GradientBoostingRegressor"
-python test.py --model_name="SVR"
-python test.py --model_name="XGBRegressor"
+# misforest
+python regressor.py --data=impute
 
-python best_model_detailed.py --model_name="RandomForestRegressor"
-python best_model_detailed.py --model_name="GradientBoostingRegressor"
-python best_model_detailed.py --model_name="SVR"
-python best_model_detailed.py --model_name="XGBRegressor"
+# GA
+python proposed.py --model_name=RandomForestRegressor
+python proposed.py --model_name=GraidentBoostingRegressor
+python proposed.py --model_name=SVR
+python proposed.py --model_name=XGBRegressor

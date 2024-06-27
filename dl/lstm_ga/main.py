@@ -163,7 +163,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
             if avg_val_loss < best_val_loss:
                 best_val_loss = avg_val_loss
                 best_epoch = epoch
-                torch.save(model.state_dict(), f'./models/best_model_{optim}.pth')
+                # torch.save(model.state_dict(), f'./models/best_model_{optim}.pth')
 
             if epoch - best_epoch >= patience:
                 print(f'Early stopping at epoch {epoch+1}')

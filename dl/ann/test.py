@@ -36,7 +36,7 @@ elif data == 'drop':
 
 print(path)
 
-test_loader = torch.load(f'{data}/test_loader/test_loader_{optim}.pth')
+test_loader = torch.load(f'{data}/test_loader/test_loader_{optim}.pth', map_location=device)
 
 class ANN(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
@@ -55,7 +55,7 @@ class ANN(nn.Module):
         out = self.fc3(out)
         return out
 
-model = torch.load(f'{data}/models/model_{optim}.pth')
+model = torch.load(f'{data}/models/model_{optim}.pth', map_location=device)
 
 # input_dim = 12
 # hidden_dim = 20

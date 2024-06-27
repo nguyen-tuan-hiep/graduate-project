@@ -20,35 +20,44 @@ set_seed(40)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--optim', type=str)
-parser.add_argument('--data', type=str)
 args = parser.parse_args()
 optim = args.optim
-data = args.data
 
 # Check if GPU is available
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 print('Using device:', device)
-test_loader = torch.load(f'./test_loader/test_loader_{optim}.pth')
+test_loader = torch.load(f'./test_loader/test_loader_{optim}.pth', map_location=device)
 
 class ANN(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
         super(ANN, self).__init__()
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.relu = nn.ReLU()
+        self.dropout = nn.Dropout(0.2)
         self.fc2 = nn.Linear(hidden_dim, hidden_dim)
         self.relu = nn.ReLU()
-        self.fc3 = nn.Linear(hidden_dim, output_dim)
+        self.dropout = nn.Dropout(0.2)
+        self.fc3 = nn.Linear(hidden_dim, hidden_dim)
+        self.relu = nn.ReLU()
+        self.dropout = nn.Dropout(0.2)
+        self.fc4 = nn.Linear(hidden_dim, output_dim)
+
 
     def forward(self, x):
         out = self.fc1(x)
+        out = self.dropout(out)
         out = self.relu(out)
         out = self.fc2(out)
         out = self.relu(out)
+        out = self.dropout(out)
         out = self.fc3(out)
+        out = self.relu(out)
+        out = self.dropout(out)
+        out = self.fc4(out)
         return out
 
-model = torch.load(f'{data}/models/model_{optim}.pth')
+model = torch.load(f'./models/model_{optim}.pth', map_location=device)
 
 # input_dim = 12
 # hidden_dim = 20

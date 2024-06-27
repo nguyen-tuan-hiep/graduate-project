@@ -31,7 +31,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print('Using device:', device)
 
 
-test_loader = torch.load(f'./test_loader/test_loader_{optim}.pth')
+test_loader = torch.load(f'./test_loader/test_loader_{optim}.pth', map_location=device)
 
 
 class LSTM(nn.Module):
@@ -48,7 +48,7 @@ class LSTM(nn.Module):
         out = self.fc(out[:, -1, :])
         return out
 
-model = torch.load(f'/models/model_{optim}.pth')
+model = torch.load(f'./models/model_{optim}.pth', map_location=device)
 
 # evaluate the model on test_loader
 model.eval()
