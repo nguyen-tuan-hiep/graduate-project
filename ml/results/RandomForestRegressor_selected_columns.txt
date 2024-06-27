@@ -1,0 +1,9 @@
+TEMP_°C
+pH
+Mg_meq_L
+ALK_meq_L
+Cl_meq_L
+SO4_meq_L
+NO32_mg_L
+TOTP_mg_L
+DO_mg_L

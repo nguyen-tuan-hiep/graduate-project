@@ -1,0 +1,8 @@
+pH
+Ca_meq_L
+Mg_meq_L
+ALK_meq_L
+Cl_meq_L
+SO4_meq_L
+NH4N_mg_L
+DO_mg_L
