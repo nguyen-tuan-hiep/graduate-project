@@ -44,27 +44,32 @@ def plot_smoothed_relationship(df, feature, window_size=10, threshold=0.4):
         df_copy[f'{col}_MA'] = df_copy[col].rolling(window=window_size).mean()
         df_copy[f'{feature}_MA'] = df_copy[feature].rolling(window=window_size).mean()
 
-        fig, ax1 = plt.subplots(figsize=(15, 8))
+        fig, ax1 = plt.subplots(figsize=(14, 6))
         ax2 = ax1.twinx()
 
         # breakpoint()
-        sns.lineplot(data=df_copy, x=df_copy.index, y=f'{feature}_MA', ax=ax1, label=f'{feature} (Smoothed)', marker='o', color='r')
-        sns.lineplot(data=df_copy, x=df_copy.index, y=f'{col}_MA', ax=ax2, label=f'{col} (Smoothed)', marker='o', color='b')
+        sns.lineplot(data=df_copy, x=df_copy.index, y=f'{feature}_MA', ax=ax1, label=f'{feature}', marker='o', color='r')
+        sns.lineplot(data=df_copy, x=df_copy.index, y=f'{col}_MA', ax=ax2, label=f'{col}', marker='o', color='b')
 
-        ax1.set_ylabel(f'{feature} Values')
-        ax2.set_ylabel(f'{col} Values')
 
-        plt.title(f'Smoothed Relationship of {feature} with {col}. Corr: {corr_value:.2f}')
-        ax1.set_xlabel('Date')
+        ax1.set_ylabel(f'{feature} Values', fontsize=15)
+        ax2.set_ylabel(f'{col} Values', fontsize=15)
+
+        # plt.title(f'Relationship of {feature} with {col}. Corr: {corr_value:.2f}')
+        ax1.set_xlabel('Date', fontsize=14)
+        ax1.tick_params(axis='x', labelsize=14)
+        ax1.tick_params(axis='y', labelsize=14)
+        ax2.tick_params(axis='y', labelsize=14)
         locator = AutoDateLocator(minticks=5, maxticks=10)
         formatter = DateFormatter('%Y-%m-%d')
         ax1.xaxis.set_major_locator(locator)
         ax1.xaxis.set_major_formatter(formatter)
         plt.grid(True)
-        ax1.set_xlim(left=pd.to_datetime(start_date), right=pd.to_datetime('2024-04-01'))
-        ax1.legend(loc='upper left')
-        ax2.legend(loc='upper right')
-        plt.savefig(f'./results/{feature}_{col}_smoothed.png')
+        ax1.set_xlim(left=pd.to_datetime(start_date), right=pd.to_datetime('2022-01-01'))
+        ax1.legend(loc='upper left', fontsize=15)
+        ax2.legend(loc='upper right', fontsize=15)
+        plt.savefig(f'./results/{feature}_{col}.png')
+        plt.savefig(f'./results/{feature}_{col}.pdf')
 
 
 plot_smoothed_relationship(df_monthly, 'COND_mS_m')
