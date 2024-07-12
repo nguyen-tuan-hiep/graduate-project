@@ -38,7 +38,7 @@ columns = ['Mg_meq_L', 'TOTP_mg_L', 'pH', 'TEMP_°C', 'TSS_mg_L', 'DO_mg_L', 'NH
 
 # Check if GPU is available
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(device)
+print('Using device:', device)
 
 train_df = pd.read_csv('../../data/combined_0_to_nan_impute/train.csv', usecols=columns)
 test_df = pd.read_csv('../../data/combined_0_to_nan_impute/test.csv', usecols=columns)
